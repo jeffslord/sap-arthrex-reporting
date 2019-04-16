@@ -1,0 +1,22 @@
+{
+    "sap_hba_ecc-hdi": {
+        "object_owner": {
+            "schema_roles": [
+                {
+                    "roles": [
+                        "sap.hba.ecc::PublicAccessSchema#"
+                    ]
+                }
+            ]
+        },
+        "application_user": {
+            "schema_roles": [
+                {
+                    "roles": [
+                        "sap.hba.ecc::PublicAccessSchema"
+                    ]
+                }
+            ]
+        }
+    }
+}

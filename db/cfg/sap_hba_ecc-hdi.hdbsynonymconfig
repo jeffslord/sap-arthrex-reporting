@@ -1,0 +1,98 @@
+{
+    "sap.hba.ecc.reporting::BillingDocumentItem": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::BillingDocumentItem"
+        }
+    },
+    "sap.hba.ecc.reporting::SDDocItemBusinessPartner": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::SDDocItemBusinessPartner"
+        }
+    },
+    "sap.hba.ecc.reporting::CustomerBasicData": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::CustomerBasicData"
+        }
+    },
+    "sap.hba.ecc.reporting::BillingDocumentHeader": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::BillingDocumentHeader"
+        }
+    },
+    "sap.hba.ecc.reporting::DistributionChannel": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::DistributionChannel"
+        }
+    },
+    "sap.hba.ecc.reporting::CustomerGroup": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::CustomerGroup"
+        }
+    },
+    "sap.hba.ecc.reporting::AccountingPostingStatus": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::AccountingPostingStatus"
+        }
+    },
+    "sap.hba.ecc.reporting::SalesDistrict": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::SalesDistrict"
+        }
+    },
+    "sap.hba.ecc.reporting::SDDocumentCategory": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::SDDocumentCategory"
+        }
+    },
+    "sap.hba.ecc.reporting::BillingDocumentType": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::BillingDocumentType"
+        }
+    },
+    "sap.hba.ecc.reporting::BillingDocumentCategory": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::BillingDocumentCategory"
+        }
+    },
+    "sap.hba.ecc.reporting::ProductHierarchyNode": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::ProductHierarchyNode"
+        }
+    },
+    "sap.hba.ecc.reporting::UnitOfMeasureName": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::UnitOfMeasureName"
+        }
+    },
+    "sap.hba.ecc.reporting::SAPClient": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::SAPClient"
+        }
+    },
+    "sap.hba.ecc.reporting::SDDocHeaderBusinessPartner": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::SDDocHeaderBusinessPartner"
+        }
+    },
+    "sap.hba.ecc.reporting::AccountingTransferStatus": {
+        "target": {
+            "*.configure": "sap_hba_ecc-hdi",
+            "object": "sap.hba.ecc::AccountingTransferStatus"
+        }
+    }
+}

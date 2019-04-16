@@ -1,0 +1,30 @@
+[
+    {
+        "name": "db\\results\\sap_hba_ecc_reporting_2019415-152530\\db\\src\\BillingDocumentItemQuery.hdbcalculationview",
+        "pkgOnlyName": "ults\\sap_hba_ecc_reporting_2019415-152530\\db\\src\\BillingDocumentItemQuery.hdbcalculationview",
+        "ext": "hdbcalculationview",
+        "container": "db",
+        "index": 0
+    },
+    {
+        "name": "db\\results\\sap_hba_ecc_reporting_2019415-152530\\db\\src\\BillingDocumentQuery.hdbcalculationview",
+        "pkgOnlyName": "ults\\sap_hba_ecc_reporting_2019415-152530\\db\\src\\BillingDocumentQuery.hdbcalculationview",
+        "ext": "hdbcalculationview",
+        "container": "db",
+        "index": 1
+    },
+    {
+        "name": "db\\src\\sap\\hba\\ecc\\reporting\\BillingDocumentItemQuery.hdbcalculationview.properties",
+        "pkgOnlyName": "\\sap\\hba\\ecc\\reporting\\BillingDocumentItemQuery.hdbcalculationview.properties",
+        "ext": "properties",
+        "container": "db",
+        "index": 2
+    },
+    {
+        "name": "db\\src\\sap\\hba\\ecc\\reporting\\BillingDocumentQuery.hdbcalculationview.properties",
+        "pkgOnlyName": "\\sap\\hba\\ecc\\reporting\\BillingDocumentQuery.hdbcalculationview.properties",
+        "ext": "properties",
+        "container": "db",
+        "index": 3
+    }
+]

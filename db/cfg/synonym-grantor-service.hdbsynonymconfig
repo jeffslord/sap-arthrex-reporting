@@ -1,0 +1,32 @@
+{
+    "sap.hba.ecc.reporting::TCURV": {
+        "target": {
+            "schema": "ECC_SIDECAR",
+            "object": "TCURV"
+        }
+    },
+    "sap.hba.ecc.reporting::TCURX": {
+        "target": {
+            "schema": "ECC_SIDECAR",
+            "object": "TCURX"
+        }
+    },
+    "sap.hba.ecc.reporting::TCURN": {
+        "target": {
+            "schema": "ECC_SIDECAR",
+            "object": "TCURN"
+        }
+    },
+    "sap.hba.ecc.reporting::TCURF": {
+        "target": {
+            "schema": "ECC_SIDECAR",
+            "object": "TCURF"
+        }
+    },
+    "sap.hba.ecc.reporting::TCURR": {
+        "target": {
+            "schema": "ECC_SIDECAR",
+            "object": "TCURR"
+        }
+    }
+}

@@ -1,0 +1,18 @@
+var main_filedata = {
+    "results\\sap_hba_ecc_reporting_2019415-152530\\db\\src\\BillingDocumentItemQuery.hdbcalculationview": {
+        "container": "db",
+        "fileIndex": 0
+    },
+    "results\\sap_hba_ecc_reporting_2019415-152530\\db\\src\\BillingDocumentQuery.hdbcalculationview": {
+        "container": "db",
+        "fileIndex": 1
+    },
+    "src\\sap\\hba\\ecc\\reporting\\BillingDocumentItemQuery.hdbcalculationview.properties": {
+        "container": "db",
+        "fileIndex": 2
+    },
+    "src\\sap\\hba\\ecc\\reporting\\BillingDocumentQuery.hdbcalculationview.properties": {
+        "container": "db",
+        "fileIndex": 3
+    }
+};

@@ -1,0 +1,33 @@
+_schema-version: 2.0
+ID: sap_hba_ecc_reporting
+description: null
+version: 0.0.1
+modules:
+  - name: sap_hba_ecc_reporting-db
+    type: hdb
+    path: db
+    requires:
+      - name: sap_hba_ecc_reporting-hdi
+        properties:
+          TARGET_CONTAINER: '~{service-name}'
+      - name: sap_hba_ecc-hdi
+      - name: synonym-grantor-service
+resources:
+  - name: sap_hba_ecc_reporting-hdi
+    type: com.sap.xs.hdi-container
+    properties:
+      service-name: '${service-name}'
+  - name: sap_hba_ecc-hdi
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: sap_hba_ecc-hdi
+  - name: synonym-grantor-service
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: arthrex-synonym-grantor-service
+  - name: cross-container-service-1
+    parameters:
+      service-name: sap_hba_ecc-hdi
+    properties:
+      the-service-name: '${service-name}'
+    type: org.cloudfoundry.existing-service

@@ -1,0 +1,82 @@
+{
+    "arthrex-synonym-grantor-service": {
+        "object_owner": {
+            "object_privileges": [
+                {
+                    "name": "TCURV",
+                    "schema": "ECC_SIDECAR",
+                    "privileges_with_grant_option": [
+                        "SELECT"
+                    ]
+                },
+                {
+                    "name": "TCURX",
+                    "schema": "ECC_SIDECAR",
+                    "privileges_with_grant_option": [
+                        "SELECT"
+                    ]
+                },
+                {
+                    "name": "TCURN",
+                    "schema": "ECC_SIDECAR",
+                    "privileges_with_grant_option": [
+                        "SELECT"
+                    ]
+                },
+                {
+                    "name": "TCURF",
+                    "schema": "ECC_SIDECAR",
+                    "privileges_with_grant_option": [
+                        "SELECT"
+                    ]
+                },
+                {
+                    "name": "TCURR",
+                    "schema": "ECC_SIDECAR",
+                    "privileges_with_grant_option": [
+                        "SELECT"
+                    ]
+                }
+            ]
+        },
+        "application_user": {
+            "object_privileges": [
+                {
+                    "name": "TCURV",
+                    "privileges": [
+                        "SELECT"
+                    ],
+                    "schema": "ECC_SIDECAR"
+                },
+                {
+                    "name": "TCURX",
+                    "privileges": [
+                        "SELECT"
+                    ],
+                    "schema": "ECC_SIDECAR"
+                },
+                {
+                    "name": "TCURN",
+                    "privileges": [
+                        "SELECT"
+                    ],
+                    "schema": "ECC_SIDECAR"
+                },
+                {
+                    "name": "TCURF",
+                    "privileges": [
+                        "SELECT"
+                    ],
+                    "schema": "ECC_SIDECAR"
+                },
+                {
+                    "name": "TCURR",
+                    "privileges": [
+                        "SELECT"
+                    ],
+                    "schema": "ECC_SIDECAR"
+                }
+            ]
+        }
+    }
+}

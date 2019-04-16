@@ -1,0 +1,7 @@
+{
+    "sap.hba.ecc.reporting::TCURV": {},
+    "sap.hba.ecc.reporting::TCURX": {},
+    "sap.hba.ecc.reporting::TCURN": {},
+    "sap.hba.ecc.reporting::TCURF": {},
+    "sap.hba.ecc.reporting::TCURR": {}
+}

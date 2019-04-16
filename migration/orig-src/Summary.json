@@ -1,0 +1,14 @@
+[
+  {
+    "targetFiles": [
+      ".\\sap\\hba\\ecc\\reporting\\BillingDocumentItemQuery.calculationview"
+    ],
+    "sourceFile": ".\\sap\\hba\\ecc\\reporting\\BillingDocumentItemQuery.calculationview"
+  },
+  {
+    "targetFiles": [
+      ".\\sap\\hba\\ecc\\reporting\\BillingDocumentQuery.calculationview"
+    ],
+    "sourceFile": ".\\sap\\hba\\ecc\\reporting\\BillingDocumentQuery.calculationview"
+  }
+]

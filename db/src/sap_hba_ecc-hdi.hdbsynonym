@@ -1,0 +1,18 @@
+{
+    "sap.hba.ecc.reporting::BillingDocumentItem": {},
+    "sap.hba.ecc.reporting::SDDocItemBusinessPartner": {},
+    "sap.hba.ecc.reporting::CustomerBasicData": {},
+    "sap.hba.ecc.reporting::BillingDocumentHeader": {},
+    "sap.hba.ecc.reporting::DistributionChannel": {},
+    "sap.hba.ecc.reporting::CustomerGroup": {},
+    "sap.hba.ecc.reporting::AccountingPostingStatus": {},
+    "sap.hba.ecc.reporting::SalesDistrict": {},
+    "sap.hba.ecc.reporting::SDDocumentCategory": {},
+    "sap.hba.ecc.reporting::BillingDocumentType": {},
+    "sap.hba.ecc.reporting::BillingDocumentCategory": {},
+    "sap.hba.ecc.reporting::ProductHierarchyNode": {},
+    "sap.hba.ecc.reporting::UnitOfMeasureName": {},
+    "sap.hba.ecc.reporting::SAPClient": {},
+    "sap.hba.ecc.reporting::SDDocHeaderBusinessPartner": {},
+    "sap.hba.ecc.reporting::AccountingTransferStatus": {}
+}

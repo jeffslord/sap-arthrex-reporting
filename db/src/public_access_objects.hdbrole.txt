@@ -1,0 +1,21 @@
+{
+    "role": {
+        "name": "sap.hba.ecc.reporting::PublicAccessObjects",
+        "object_privileges": [
+            {
+                "name": "sap.hba.ecc.reporting::BillingDocumentItemQuery",
+                "type": "VIEW",
+                "privileges": [
+                    "SELECT"
+                ]
+            },
+            {
+                "name": "sap.hba.ecc.reporting::BillingDocumentQuery",
+                "type": "VIEW",
+                "privileges": [
+                    "SELECT"
+                ]
+            }
+        ]
+    }
+}

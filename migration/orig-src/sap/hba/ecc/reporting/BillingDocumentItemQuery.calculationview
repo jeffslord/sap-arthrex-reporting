@@ -1,0 +1,1509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="BillingDocumentItemQuery" applyPrivilegeType="NONE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" alwaysAggregateResult="false" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="true" executionSemantic="UNDEFINED" outputViewType="Aggregation" runWithInvokerPrivileges="false">
+  <origin/>
+  <descriptions defaultDescription="Analytical report &quot;List of Billing Document Items&quot;"/>
+  <metadata changedAt="2019-04-15 14:44:17.749" createdAt="2019-04-15 14:44:17.338"/>
+  <defaultSchema schemaName="SAP_ECC"/>
+  <localVariables>
+    <variable id="V_SAPClient">
+      <descriptions defaultDescription="SAP Client"/>
+      <variableProperties datatype="CHAR" mandatory="true">
+        <valueDomain type="AttributeValue">
+          <externalLikeStructureName>sap.hba.ecc::SAPClient</externalLikeStructureName>
+          <externalLikeStructureType>CALCULATION_VIEW</externalLikeStructureType>
+          <externalLikeElementName>SAPClient</externalLikeElementName>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="BillingDocumentItem" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/BillingDocumentItem</resourceUri>
+    </DataSource>
+    <DataSource id="SDDocItemBusinessPartner" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/SDDocItemBusinessPartner</resourceUri>
+    </DataSource>
+    <DataSource id="CustomerBasicData" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/CustomerBasicData</resourceUri>
+    </DataSource>
+    <DataSource id="BillingDocumentHeader" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/BillingDocumentHeader</resourceUri>
+    </DataSource>
+    <DataSource id="DistributionChannel" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/DistributionChannel</resourceUri>
+    </DataSource>
+    <DataSource id="CustomerGroup" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/CustomerGroup</resourceUri>
+    </DataSource>
+    <DataSource id="AccountingPostingStatus" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/AccountingPostingStatus</resourceUri>
+    </DataSource>
+    <DataSource id="SalesDistrict" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/SalesDistrict</resourceUri>
+    </DataSource>
+    <DataSource id="SDDocumentCategory" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/SDDocumentCategory</resourceUri>
+    </DataSource>
+    <DataSource id="BillingDocumentType" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/BillingDocumentType</resourceUri>
+    </DataSource>
+    <DataSource id="BillingDocumentCategory" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/BillingDocumentCategory</resourceUri>
+    </DataSource>
+    <DataSource id="ProductHierarchyNode" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/ProductHierarchyNode</resourceUri>
+    </DataSource>
+    <DataSource id="UnitOfMeasureName" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/sap.hba.ecc/calculationviews/UnitOfMeasureName</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#BillingDocumentItem">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+      </input>
+      <input node="#SDDocItemBusinessPartner">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="SalesDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="SalesDocumentItem"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="BillingDocument"/>
+      <joinAttribute name="BillingDocumentItem"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+      </input>
+      <input node="#CustomerBasicData">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="CustomerName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="Customer"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="SoldToParty"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_4" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+      </input>
+      <input node="#BillingDocumentHeader">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreatedByUser"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="BillingDocument"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_5" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_4">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#DistributionChannel">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="DistributionChannel"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_6" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_5">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#CustomerGroup">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="CustomerGroup"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_7" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_6">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#AccountingPostingStatus">
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="AccountingPostingStatus"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_8" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="SalesDistrictName"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_7">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#SalesDistrict">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="SalesDistrict"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_10" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="SalesDistrictName"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="SDDocumentCategoryName"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_8">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#SDDocumentCategory">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategoryName" source="SDDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+      </input>
+      <joinAttribute name="SDDocumentCategory"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_11" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="SalesDistrictName"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentTypeName"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="SDDocumentCategoryName"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_10">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategoryName" source="SDDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#BillingDocumentType">
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentTypeName" source="BillingDocumentTypeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="BillingDocumentType"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_12" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="SalesDistrictName"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentTypeName"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="BillingDocumentCategoryName"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="SDDocumentCategoryName"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_11">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentTypeName" source="BillingDocumentTypeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategoryName" source="SDDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#BillingDocumentCategory">
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategoryName" source="BillingDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+      </input>
+      <joinAttribute name="BillingDocumentCategory"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="SalesDistrictName"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentTypeName"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="BillingDocumentCategoryName"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="SDDocumentCategoryName"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ProductHierarchyNodeName"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_12">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentTypeName" source="BillingDocumentTypeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategoryName" source="BillingDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategoryName" source="SDDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#ProductHierarchyNode">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNodeName" source="ProductHierarchyNodeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="ProductHierarchyNode"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_13" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="textTable" languageColumn="Language">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="SalesDistrictName"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentTypeName"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="BillingDocumentCategoryName"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="SDDocumentCategoryName"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ProductHierarchyNodeName"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="BillingQuantityUnit_E"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_1_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentTypeName" source="BillingDocumentTypeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategoryName" source="BillingDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategoryName" source="SDDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNodeName" source="ProductHierarchyNodeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+      </input>
+      <input node="#UnitOfMeasureName">
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit_E" source="UnitOfMeasure_E"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="UnitOfMeasure"/>
+      </input>
+      <joinAttribute name="SAPClient"/>
+      <joinAttribute name="BillingQuantityUnit"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_14">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SAPClient"/>
+        <viewAttribute id="BillingDocument"/>
+        <viewAttribute id="BillingDocumentItem"/>
+        <viewAttribute id="BillingDocumentType"/>
+        <viewAttribute id="BillingDocumentTypeName"/>
+        <viewAttribute id="BillingDocumentCategory"/>
+        <viewAttribute id="BillingDocumentCategoryName"/>
+        <viewAttribute id="BillingDocumentDate"/>
+        <viewAttribute id="SDDocumentCategory"/>
+        <viewAttribute id="SDDocumentCategoryName"/>
+        <viewAttribute id="CustomerGroup"/>
+        <viewAttribute id="CustomerGroupName"/>
+        <viewAttribute id="SalesDistrict"/>
+        <viewAttribute id="SalesDistrictName"/>
+        <viewAttribute id="SalesOrganization"/>
+        <viewAttribute id="SalesOrganizationName"/>
+        <viewAttribute id="DistributionChannel"/>
+        <viewAttribute id="DistributionChannelName"/>
+        <viewAttribute id="Plant"/>
+        <viewAttribute id="Batch"/>
+        <viewAttribute id="ProductHierarchyNode"/>
+        <viewAttribute id="ProductHierarchyNodeName"/>
+        <viewAttribute id="Material"/>
+        <viewAttribute id="BillingDocumentItemText"/>
+        <viewAttribute id="ReferenceSDDocument"/>
+        <viewAttribute id="ReferenceSDDocumentItem"/>
+        <viewAttribute id="BillingQuantityUnit"/>
+        <viewAttribute id="TransactionCurrency"/>
+        <viewAttribute id="AccountingDocument"/>
+        <viewAttribute id="ReturnItemProcessingType"/>
+        <viewAttribute id="SoldToParty"/>
+        <viewAttribute id="SoldToPartyName"/>
+        <viewAttribute id="PayerParty"/>
+        <viewAttribute id="PayerPartyName"/>
+        <viewAttribute id="CreationUserAccount"/>
+        <viewAttribute id="AccountingPostingStatus"/>
+        <viewAttribute id="AccountingPostingStatusDesc"/>
+        <viewAttribute id="StatisticsCurrency"/>
+        <viewAttribute id="TaxAmount"/>
+        <viewAttribute id="BillingQuantity"/>
+        <viewAttribute id="ItemNetAmountOfBillingDoc"/>
+        <viewAttribute id="BillingQuantityUnit_E"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="BillingDocumentDate_E" expressionLanguage="COLUMN_ENGINE">
+          <formula>daydate(&quot;BillingDocumentDate&quot;)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="TaxAmount_E" length="26" scale="6" expressionLanguage="COLUMN_ENGINE">
+          <formula>decfloat(&quot;TaxAmount&quot;)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="ItemNetAmountOfBillingDoc_E" length="26" scale="6" expressionLanguage="COLUMN_ENGINE">
+          <formula>decfloat(&quot;ItemNetAmountOfBillingDoc&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#Join_13">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentTypeName" source="BillingDocumentTypeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategoryName" source="BillingDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentDate" source="BillingDocumentDate"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategoryName" source="SDDocumentCategoryName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Plant" source="Plant"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Batch" source="Batch"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNodeName" source="ProductHierarchyNodeName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Material" source="Material"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItemText" source="BillingDocumentItemText"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocument" source="ReferenceSDDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReferenceSDDocumentItem" source="ReferenceSDDocumentItem"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="BillingQuantityUnit"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TransactionCurrency" source="TransactionCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingDocument" source="AccountingDocument"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ReturnItemProcessingType" source="ReturnItemProcessingType"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="SoldToPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreationUserAccount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TaxAmount" source="TaxAmount"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantity" source="BillingQuantity"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ItemNetAmountOfBillingDoc" source="ItemNetAmountOfBillingDoc"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit_E" source="BillingQuantityUnit_E"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_14">
+    <descriptions/>
+    <attributes>
+      <attribute id="SAPClient" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SAP Client"/>
+        <localVariable>#V_SAPClient</localVariable>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SAPClient"/>
+      </attribute>
+      <attribute id="BillingDocument" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocument"/>
+      </attribute>
+      <attribute id="BillingDocumentItem" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document Item"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentItem"/>
+      </attribute>
+      <attribute id="BillingDocumentType" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document Type"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentType"/>
+      </attribute>
+      <attribute id="BillingDocumentTypeName" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document Type Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentTypeName"/>
+      </attribute>
+      <attribute id="BillingDocumentCategory" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document Category"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentCategory"/>
+      </attribute>
+      <attribute id="BillingDocumentCategoryName" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document Category Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentCategoryName"/>
+      </attribute>
+      <attribute id="BillingDocumentDate_E" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document Date"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentDate_E"/>
+      </attribute>
+      <attribute id="SDDocumentCategory" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SD Document Category"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SDDocumentCategory"/>
+      </attribute>
+      <attribute id="SDDocumentCategoryName" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SD Document Category Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SDDocumentCategoryName"/>
+      </attribute>
+      <attribute id="CustomerGroup" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Customer Group"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="CustomerGroup"/>
+      </attribute>
+      <attribute id="CustomerGroupName" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Customer Group Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="CustomerGroupName"/>
+      </attribute>
+      <attribute id="SalesDistrict" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sales District"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SalesDistrict"/>
+      </attribute>
+      <attribute id="SalesDistrictName" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sales District Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SalesDistrictName"/>
+      </attribute>
+      <attribute id="SalesOrganization" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sales Organization"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SalesOrganization"/>
+      </attribute>
+      <attribute id="SalesOrganizationName" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sales Organization Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SalesOrganizationName"/>
+      </attribute>
+      <attribute id="DistributionChannel" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Distribution Channel"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="DistributionChannel"/>
+      </attribute>
+      <attribute id="DistributionChannelName" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Distribution Channel Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="DistributionChannelName"/>
+      </attribute>
+      <attribute id="Plant" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Plant"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="Plant"/>
+      </attribute>
+      <attribute id="Batch" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Batch"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="Batch"/>
+      </attribute>
+      <attribute id="ProductHierarchyNode" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Product Hierarchy Node"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="ProductHierarchyNode"/>
+      </attribute>
+      <attribute id="ProductHierarchyNodeName" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Product Hierarchy Node Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="ProductHierarchyNodeName"/>
+      </attribute>
+      <attribute id="Material" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Material"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="Material"/>
+      </attribute>
+      <attribute id="BillingDocumentItemText" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Document Item Text"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentItemText"/>
+      </attribute>
+      <attribute id="ReferenceSDDocument" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Reference SD Document"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="ReferenceSDDocument"/>
+      </attribute>
+      <attribute id="ReferenceSDDocumentItem" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Reference SD Document Item"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="ReferenceSDDocumentItem"/>
+      </attribute>
+      <attribute id="BillingQuantityUnit" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Quantity Unit"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingQuantityUnit"/>
+      </attribute>
+      <attribute id="BillingQuantityUnit_E" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Billing Quantity Unit"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="BillingQuantityUnit_E"/>
+      </attribute>
+      <attribute id="TransactionCurrency" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Transaction Currency"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="TransactionCurrency"/>
+      </attribute>
+      <attribute id="AccountingDocument" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Accounting Document"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="AccountingDocument"/>
+      </attribute>
+      <attribute id="ReturnItemProcessingType" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Return Item Processing Type"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="ReturnItemProcessingType"/>
+      </attribute>
+      <attribute id="SoldToParty" order="32" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sold To Party"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SoldToParty"/>
+      </attribute>
+      <attribute id="SoldToPartyName" order="33" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sold To Party Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="SoldToPartyName"/>
+      </attribute>
+      <attribute id="PayerParty" order="34" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Payer Party"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="PayerParty"/>
+      </attribute>
+      <attribute id="PayerPartyName" order="35" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Payer Party Name"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="PayerPartyName"/>
+      </attribute>
+      <attribute id="CreatedByUser" order="36" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Created By User"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="CreationUserAccount"/>
+      </attribute>
+      <attribute id="AccountingPostingStatus" order="37" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Accounting Posting Status"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="AccountingPostingStatus"/>
+      </attribute>
+      <attribute id="AccountingPostingStatusDesc" order="38" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Accounting Posting Status Desc"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="AccountingPostingStatusDesc"/>
+      </attribute>
+      <attribute id="StatisticsCurrency" order="39" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Statistics Currency"/>
+        <searchProperties/>
+        <keyMapping columnObjectName="Projection_14" columnName="StatisticsCurrency"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="BillingQuantity" order="40" semanticType="quantity" aggregationType="sum" measureType="quantity">
+        <descriptions defaultDescription="Billing Quantity"/>
+        <unitCurrencyAttribute attributeName="BillingQuantityUnit_E"/>
+        <measureMapping columnObjectName="Projection_14" columnName="BillingQuantity"/>
+      </measure>
+      <measure id="TaxAmount_E" order="41" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="Tax Amount"/>
+        <currencyConversion>
+          <sourceCurrency>
+            <attribute attributeName="TransactionCurrency"/>
+          </sourceCurrency>
+          <erpDecimalShift>true</erpDecimalShift>
+        </currencyConversion>
+        <measureMapping columnObjectName="Projection_14" columnName="TaxAmount_E"/>
+      </measure>
+      <measure id="ItemNetAmountOfBillingDoc_E" order="42" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="Item Net Amount Of Billing Doc"/>
+        <currencyConversion>
+          <sourceCurrency>
+            <attribute attributeName="TransactionCurrency"/>
+          </sourceCurrency>
+          <erpDecimalShift>true</erpDecimalShift>
+        </currencyConversion>
+        <measureMapping columnObjectName="Projection_14" columnName="ItemNetAmountOfBillingDoc_E"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="22" y="87"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="1323"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="1225"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="1127"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="1029"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_6" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="931"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_7" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="833"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_8" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="735"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_10" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="637"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_11" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="539"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_12" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="441"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_1_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="343"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_13" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="245"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Projection_14" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="166"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

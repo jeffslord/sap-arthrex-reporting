@@ -1,0 +1,12 @@
+{
+    "schemaMapping": [
+        {
+            "AUTHORING_SCHEMA": "SAPA4H",
+            "PHYSICAL_SCHEMA": "SFLIGHT"
+        },
+        {
+            "AUTHORING_SCHEMA": "SAP_ECC",
+            "PHYSICAL_SCHEMA": "ECC_SIDECAR"
+        }
+    ]
+}
