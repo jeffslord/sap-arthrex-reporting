@@ -1,0 +1,8 @@
+{
+	"role": {
+		"name": "sap.hba.ecc.reporting::aprole",
+		"schema_analytic_privileges": [{
+    		"privileges": ["sap.hba.ecc.reporting.AP::TEST_AP"]
+		}]
+	}
+}
