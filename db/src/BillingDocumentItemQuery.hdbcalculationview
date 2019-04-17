@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="sap.hba.ecc.reporting::BillingDocumentItemQuery" applyPrivilegeType="NONE" defaultClient="" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="true" executionSemantic="UNDEFINED" outputViewType="Aggregation" runWithInvokerPrivileges="false" xscCompatibilityMode="true">
-  <origin/>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="sap.hba.ecc.reporting::BillingDocumentItemQuery" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="true" executionSemantic="UNDEFINED" outputViewType="Aggregation" runWithInvokerPrivileges="false" xscCompatibilityMode="true">
+<origin/>
   <descriptions defaultDescription="Analytical report &quot;List of Billing Document Items&quot;"/>
   <metadata changedAt="2019-04-15 14:44:17.749" createdAt="2019-04-15 14:44:17.338"/>
   <localVariables>
@@ -60,7 +60,7 @@
     </DataSource>
   </dataSources>
   <calculationViews>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -93,7 +93,8 @@
         <viewAttribute id="PayerPartyName"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#BillingDocumentItem">
+      <restrictedViewAttributes/>
+      <input node="BillingDocumentItem">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -122,7 +123,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
       </input>
-      <input node="#SDDocItemBusinessPartner">
+      <input node="SDDocItemBusinessPartner">
         <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="SalesDocument"/>
@@ -132,7 +133,7 @@
       <joinAttribute name="BillingDocument"/>
       <joinAttribute name="BillingDocumentItem"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -166,7 +167,8 @@
         <viewAttribute id="PayerPartyName"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_1">
+      <restrictedViewAttributes/>
+      <input node="Join_1">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
@@ -196,7 +198,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
       </input>
-      <input node="#CustomerBasicData">
+      <input node="CustomerBasicData">
         <mapping xsi:type="Calculation:AttributeMapping" target="SoldToPartyName" source="CustomerName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="Customer"/>
@@ -204,7 +206,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="SoldToParty"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_4" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_4" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -242,7 +244,8 @@
         <viewAttribute id="PayerPartyName"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_2">
+      <restrictedViewAttributes/>
+      <input node="Join_2">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SoldToParty" source="SoldToParty"/>
@@ -273,7 +276,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="PayerParty" source="PayerParty"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="PayerPartyName" source="PayerPartyName"/>
       </input>
-      <input node="#BillingDocumentHeader">
+      <input node="BillingDocumentHeader">
         <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganization" source="SalesOrganization"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SalesOrganizationName" source="SalesOrganizationName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="CreationUserAccount" source="CreatedByUser"/>
@@ -284,7 +287,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="BillingDocument"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_5" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_5" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -323,7 +326,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_4">
+      <restrictedViewAttributes/>
+      <input node="Join_4">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -358,7 +362,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#DistributionChannel">
+      <input node="DistributionChannel">
         <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannelName" source="DistributionChannelName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="DistributionChannel" source="DistributionChannel"/>
@@ -366,7 +370,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="DistributionChannel"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_6" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_6" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -406,7 +410,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_5">
+      <restrictedViewAttributes/>
+      <input node="Join_5">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -442,7 +447,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#CustomerGroup">
+      <input node="CustomerGroup">
         <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroupName" source="CustomerGroupName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="CustomerGroup" source="CustomerGroup"/>
@@ -450,7 +455,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="CustomerGroup"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_7" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_7" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -491,7 +496,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_6">
+      <restrictedViewAttributes/>
+      <input node="Join_6">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -528,7 +534,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#AccountingPostingStatus">
+      <input node="AccountingPostingStatus">
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatus" source="AccountingPostingStatus"/>
@@ -536,7 +542,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="AccountingPostingStatus"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_8" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_8" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -578,7 +584,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_7">
+      <restrictedViewAttributes/>
+      <input node="Join_7">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -616,7 +623,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#SalesDistrict">
+      <input node="SalesDistrict">
         <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrictName" source="SalesDistrictName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SalesDistrict" source="SalesDistrict"/>
@@ -624,7 +631,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="SalesDistrict"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_10" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_10" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -667,7 +674,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_8">
+      <restrictedViewAttributes/>
+      <input node="Join_8">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -706,13 +714,13 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#SDDocumentCategory">
+      <input node="SDDocumentCategory">
         <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategoryName" source="SDDocumentCategoryName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SDDocumentCategory" source="SDDocumentCategory"/>
       </input>
       <joinAttribute name="SDDocumentCategory"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_11" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_11" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -756,7 +764,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_10">
+      <restrictedViewAttributes/>
+      <input node="Join_10">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -796,7 +805,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#BillingDocumentType">
+      <input node="BillingDocumentType">
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentTypeName" source="BillingDocumentTypeName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentType" source="BillingDocumentType"/>
@@ -804,7 +813,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="BillingDocumentType"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_12" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_12" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -849,7 +858,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_11">
+      <restrictedViewAttributes/>
+      <input node="Join_11">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -890,13 +900,13 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#BillingDocumentCategory">
+      <input node="BillingDocumentCategory">
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategoryName" source="BillingDocumentCategoryName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentCategory" source="BillingDocumentCategory"/>
       </input>
       <joinAttribute name="BillingDocumentCategory"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_1" joinType="leftOuter">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -942,7 +952,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_12">
+      <restrictedViewAttributes/>
+      <input node="Join_12">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -984,7 +995,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#ProductHierarchyNode">
+      <input node="ProductHierarchyNode">
         <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNodeName" source="ProductHierarchyNodeName"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="ProductHierarchyNode" source="ProductHierarchyNode"/>
@@ -992,7 +1003,7 @@
       <joinAttribute name="SAPClient"/>
       <joinAttribute name="ProductHierarchyNode"/>
     </calculationView>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_13" cardinality="CN_1" joinOrder="OUTSIDE_IN" joinType="textTable" languageColumn="Language">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_13" cardinality="CN_1" joinType="textTable" languageColumn="Language">
       <descriptions/>
       <viewAttributes>
         <viewAttribute id="SAPClient"/>
@@ -1039,7 +1050,8 @@
         <viewAttribute id="StatisticsCurrency"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#Join_1_1">
+      <restrictedViewAttributes/>
+      <input node="Join_1_1">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -1082,7 +1094,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="AccountingPostingStatusDesc" source="AccountingPostingStatusDesc"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="StatisticsCurrency" source="StatisticsCurrency"/>
       </input>
-      <input node="#UnitOfMeasureName">
+      <input node="UnitOfMeasureName">
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit_E" source="UnitOfMeasure_E"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingQuantityUnit" source="UnitOfMeasure"/>
@@ -1147,7 +1159,8 @@
           <formula>decfloat(&quot;ItemNetAmountOfBillingDoc&quot;)</formula>
         </calculatedViewAttribute>
       </calculatedViewAttributes>
-      <input node="#Join_13">
+      <restrictedViewAttributes/>
+      <input node="Join_13">
         <mapping xsi:type="Calculation:AttributeMapping" target="SAPClient" source="SAPClient"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocument" source="BillingDocument"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="BillingDocumentItem" source="BillingDocumentItem"/>
@@ -1198,198 +1211,159 @@
     <attributes>
       <attribute id="SAPClient" order="1" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="SAP Client"/>
-        <localVariable>#V_SAPClient</localVariable>
-        <searchProperties/>
+        <localVariable>V_SAPClient</localVariable>
         <keyMapping columnObjectName="Projection_14" columnName="SAPClient"/>
       </attribute>
       <attribute id="BillingDocument" order="2" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocument"/>
       </attribute>
       <attribute id="BillingDocumentItem" order="3" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document Item"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentItem"/>
       </attribute>
       <attribute id="BillingDocumentType" order="4" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document Type"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentType"/>
       </attribute>
       <attribute id="BillingDocumentTypeName" order="5" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document Type Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentTypeName"/>
       </attribute>
       <attribute id="BillingDocumentCategory" order="6" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document Category"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentCategory"/>
       </attribute>
       <attribute id="BillingDocumentCategoryName" order="7" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document Category Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentCategoryName"/>
       </attribute>
       <attribute id="BillingDocumentDate_E" order="8" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document Date"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentDate_E"/>
       </attribute>
       <attribute id="SDDocumentCategory" order="9" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="SD Document Category"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SDDocumentCategory"/>
       </attribute>
       <attribute id="SDDocumentCategoryName" order="10" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="SD Document Category Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SDDocumentCategoryName"/>
       </attribute>
       <attribute id="CustomerGroup" order="11" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Customer Group"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="CustomerGroup"/>
       </attribute>
       <attribute id="CustomerGroupName" order="12" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Customer Group Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="CustomerGroupName"/>
       </attribute>
       <attribute id="SalesDistrict" order="13" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Sales District"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SalesDistrict"/>
       </attribute>
       <attribute id="SalesDistrictName" order="14" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Sales District Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SalesDistrictName"/>
       </attribute>
       <attribute id="SalesOrganization" order="15" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Sales Organization"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SalesOrganization"/>
       </attribute>
       <attribute id="SalesOrganizationName" order="16" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Sales Organization Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SalesOrganizationName"/>
       </attribute>
       <attribute id="DistributionChannel" order="17" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Distribution Channel"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="DistributionChannel"/>
       </attribute>
       <attribute id="DistributionChannelName" order="18" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Distribution Channel Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="DistributionChannelName"/>
       </attribute>
       <attribute id="Plant" order="19" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Plant"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="Plant"/>
       </attribute>
       <attribute id="Batch" order="20" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Batch"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="Batch"/>
       </attribute>
       <attribute id="ProductHierarchyNode" order="21" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Product Hierarchy Node"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="ProductHierarchyNode"/>
       </attribute>
       <attribute id="ProductHierarchyNodeName" order="22" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Product Hierarchy Node Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="ProductHierarchyNodeName"/>
       </attribute>
       <attribute id="Material" order="23" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Material"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="Material"/>
       </attribute>
       <attribute id="BillingDocumentItemText" order="24" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Document Item Text"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingDocumentItemText"/>
       </attribute>
       <attribute id="ReferenceSDDocument" order="25" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Reference SD Document"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="ReferenceSDDocument"/>
       </attribute>
       <attribute id="ReferenceSDDocumentItem" order="26" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Reference SD Document Item"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="ReferenceSDDocumentItem"/>
       </attribute>
       <attribute id="BillingQuantityUnit" order="27" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Quantity Unit"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingQuantityUnit"/>
       </attribute>
       <attribute id="BillingQuantityUnit_E" order="28" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Billing Quantity Unit"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="BillingQuantityUnit_E"/>
       </attribute>
       <attribute id="TransactionCurrency" order="29" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Transaction Currency"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="TransactionCurrency"/>
       </attribute>
       <attribute id="AccountingDocument" order="30" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Accounting Document"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="AccountingDocument"/>
       </attribute>
       <attribute id="ReturnItemProcessingType" order="31" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Return Item Processing Type"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="ReturnItemProcessingType"/>
       </attribute>
       <attribute id="SoldToParty" order="32" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Sold To Party"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SoldToParty"/>
       </attribute>
       <attribute id="SoldToPartyName" order="33" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Sold To Party Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="SoldToPartyName"/>
       </attribute>
       <attribute id="PayerParty" order="34" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Payer Party"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="PayerParty"/>
       </attribute>
       <attribute id="PayerPartyName" order="35" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Payer Party Name"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="PayerPartyName"/>
       </attribute>
       <attribute id="CreatedByUser" order="36" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Created By User"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="CreationUserAccount"/>
       </attribute>
       <attribute id="AccountingPostingStatus" order="37" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Accounting Posting Status"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="AccountingPostingStatus"/>
       </attribute>
       <attribute id="AccountingPostingStatusDesc" order="38" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Accounting Posting Status Desc"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="AccountingPostingStatusDesc"/>
       </attribute>
       <attribute id="StatisticsCurrency" order="39" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="Statistics Currency"/>
-        <searchProperties/>
         <keyMapping columnObjectName="Projection_14" columnName="StatisticsCurrency"/>
       </attribute>
     </attributes>
@@ -1410,22 +1384,28 @@
       <measure id="TaxAmount_E" order="41" semanticType="amount" aggregationType="sum" measureType="amount">
         <descriptions defaultDescription="Tax Amount"/>
         <currencyConversion generateOutputUnitCurrencyAttribute="true" outputUnitCurrencyAttributeName="TaxAmount_E.CURRENCY">
+          <client/>
           <currencyConversionTables rates="sap.hba.ecc.reporting::TCURR" configuration="sap.hba.ecc.reporting::TCURV" prefactors="sap.hba.ecc.reporting::TCURF" notations="sap.hba.ecc.reporting::TCURN" precisions="sap.hba.ecc.reporting::TCURX"/>
           <sourceCurrency>
             <attribute attributeName="TransactionCurrency"/>
           </sourceCurrency>
           <erpDecimalShift>true</erpDecimalShift>
+          <targetCurrency/>
+          <referenceDate/>
         </currencyConversion>
         <measureMapping columnObjectName="Projection_14" columnName="TaxAmount_E"/>
       </measure>
       <measure id="ItemNetAmountOfBillingDoc_E" order="42" semanticType="amount" aggregationType="sum" measureType="amount">
         <descriptions defaultDescription="Item Net Amount Of Billing Doc"/>
         <currencyConversion generateOutputUnitCurrencyAttribute="true" outputUnitCurrencyAttributeName="ItemNetAmountOfBillingDoc_E.CURRENCY">
+          <client/>
           <currencyConversionTables rates="sap.hba.ecc.reporting::TCURR" configuration="sap.hba.ecc.reporting::TCURV" prefactors="sap.hba.ecc.reporting::TCURF" notations="sap.hba.ecc.reporting::TCURN" precisions="sap.hba.ecc.reporting::TCURX"/>
           <sourceCurrency>
             <attribute attributeName="TransactionCurrency"/>
           </sourceCurrency>
           <erpDecimalShift>true</erpDecimalShift>
+          <targetCurrency/>
+          <referenceDate/>
         </currencyConversion>
         <measureMapping columnObjectName="Projection_14" columnName="ItemNetAmountOfBillingDoc_E"/>
       </measure>
@@ -1444,49 +1424,145 @@
         <upperLeftCorner x="22" y="1323"/>
         <rectangleSize height="0" width="0"/>
       </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::BillingDocumentItem" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::SDDocItemBusinessPartner" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
       <shape modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="1225"/>
         <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::CustomerBasicData" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
       </shape>
       <shape modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="1127"/>
         <rectangleSize height="0" width="0"/>
       </shape>
+      <shape modelObjectName="Join_2" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::BillingDocumentHeader" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
       <shape modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="1029"/>
         <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_4" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::DistributionChannel" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
       </shape>
       <shape modelObjectName="Join_6" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="931"/>
         <rectangleSize height="0" width="0"/>
       </shape>
+      <shape modelObjectName="Join_5" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::CustomerGroup" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
       <shape modelObjectName="Join_7" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="833"/>
         <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_6" modelObjectNameSpace="Join_7" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::AccountingPostingStatus" modelObjectNameSpace="Join_7" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
       </shape>
       <shape modelObjectName="Join_8" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="735"/>
         <rectangleSize height="0" width="0"/>
       </shape>
+      <shape modelObjectName="Join_7" modelObjectNameSpace="Join_8" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::SalesDistrict" modelObjectNameSpace="Join_8" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
       <shape modelObjectName="Join_10" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="637"/>
         <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_8" modelObjectNameSpace="Join_10" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::SDDocumentCategory" modelObjectNameSpace="Join_10" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
       </shape>
       <shape modelObjectName="Join_11" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="539"/>
         <rectangleSize height="0" width="0"/>
       </shape>
+      <shape modelObjectName="Join_10" modelObjectNameSpace="Join_11" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::BillingDocumentType" modelObjectNameSpace="Join_11" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
       <shape modelObjectName="Join_12" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="441"/>
         <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_11" modelObjectNameSpace="Join_12" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::BillingDocumentCategory" modelObjectNameSpace="Join_12" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
       </shape>
       <shape modelObjectName="Join_1_1" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="343"/>
         <rectangleSize height="0" width="0"/>
       </shape>
+      <shape modelObjectName="Join_12" modelObjectNameSpace="Join_1_1" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::ProductHierarchyNode" modelObjectNameSpace="Join_1_1" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
       <shape modelObjectName="Join_13" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="245"/>
         <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Join_1_1" modelObjectNameSpace="Join_13" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="sap.hba.ecc.reporting::UnitOfMeasureName" modelObjectNameSpace="Join_13" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
       </shape>
       <shape modelObjectName="Projection_14" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="22" y="166"/>

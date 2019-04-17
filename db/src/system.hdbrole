@@ -1,0 +1,11 @@
+{
+	"role": {
+		"name": "sap.hba.ecc.reporting::systemrole",
+		"schema_privileges": [{
+			"privileges": [
+			"SELECT",
+			"EXECUTE"
+			]
+		}]
+	}
+}
